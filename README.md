@@ -10,6 +10,7 @@ A simple command-line application to manage personal finances, including salary,
 * Add expenses
 * View balance
 * Financial summary
+* Investment simulator
 
 ## 🛠️ Technologies
 
