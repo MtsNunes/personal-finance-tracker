@@ -1,30 +1,46 @@
 # 💰 Personal Finance Tracker
 
-## 📌 Description
+Um sistema em Python para controle financeiro pessoal com simulação de investimentos usando juros compostos.
 
-A simple command-line application to manage personal finances, including salary, expenses, and balance tracking.
+---
 
-## 🚀 Features
+## 🚀 Funcionalidades
 
-* Add salary
-* Add expenses
-* View balance
-* Financial summary
-* Investment simulator
+### 📌 Controle financeiro
+- Adicionar salário
+- Adicionar gastos
+- Visualizar saldo
+- Ver resumo financeiro
 
-## 🛠️ Technologies
+### 📈 Simulação de investimentos
+- Aportes mensais configuráveis
+- Taxa de juros mensal
+- Tempo em meses
+- Suporte a múltiplas etapas dentro da mesma simulação
+- Continuidade do capital (juros compostos realistas)
 
-* Python
+### 🧠 Histórico inteligente
+- Cada simulação é salva separadamente
+- Cada simulação contém múltiplas etapas
+- Persistência em arquivo JSON (`historico.json`)
 
-## 📚 What I learned
+---
 
-* Input/output handling
-* Conditional statements
-* Loops
-* Function-based code organization
+## 🧮 Como funciona a simulação
 
-## ▶️ How to run
+O sistema utiliza:
 
-```bash
-python main.py
-```
+- **Aportes mensais**
+- **Juros compostos**
+- **Saldo acumulado entre etapas**
+
+Exemplo de uso:
+
+1. Investir R$2000 por 24 meses  
+2. Depois mudar para R$2500 por mais 12 meses  
+3. Tudo continua acumulando na mesma "conta"
+
+---
+
+## 📂 Estrutura do projeto
+
