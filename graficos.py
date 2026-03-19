@@ -1,6 +1,13 @@
+# graficos.py
+
 import matplotlib.pyplot as plt
 
+
 def grafico_evolucao(simulacao):
+    """
+    Gera gráfico de crescimento mês a mês considerando juros compostos
+    e múltiplas etapas de investimento.
+    """
     valores = []
     meses_lista = []
     marcadores = []
@@ -13,23 +20,23 @@ def grafico_evolucao(simulacao):
         taxa = etapa["taxa"]
         meses = etapa["meses"]
 
+        # Simulação mês a mês (núcleo do cálculo financeiro)
         for _ in range(meses):
             conta = (conta + mensal) * (1 + taxa)
-
             mes_total += 1
+
             valores.append(conta)
             meses_lista.append(mes_total)
 
+        # Marca visual onde há mudança de etapa
         marcadores.append(mes_total)
 
     plt.figure(figsize=(10, 5))
     plt.plot(meses_lista, valores)
 
-    # linhas de mudança de etapa
     for m in marcadores:
         plt.axvline(x=m, linestyle='--')
 
-    # valor final
     plt.text(meses_lista[-1], valores[-1], f"{valores[-1]:.2f}")
 
     plt.xlabel("Meses")
@@ -40,7 +47,9 @@ def grafico_evolucao(simulacao):
     plt.savefig("assets/exemplo_grafico.png")
     plt.show()
 
+
 def grafico_comparacao(simulacao):
+    """Compara total investido com valor final acumulado."""
     investido = simulacao["total_investido"]
     final = simulacao["total_final"]
 
@@ -51,11 +60,9 @@ def grafico_comparacao(simulacao):
     plt.bar(categorias, valores)
 
     lucro = final - investido
-
     plt.title(f"Investido vs Final (Lucro: R$ {lucro:.2f})")
     plt.ylabel("Valor (R$)")
 
-    # valores nas barras
     for i, valor in enumerate(valores):
         plt.text(i, valor, f"{valor:.2f}", ha='center', va='bottom')
 

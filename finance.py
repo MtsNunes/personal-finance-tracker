@@ -15,17 +15,13 @@ def calcular_saldo(salario, gastos):
 
 def calcular_investimento(mensal, taxa, meses, saldo_inicial=0):
     """
-    Calcula o crescimento de um investimento com aportes mensais
-    e juros compostos.
+    Simula investimento com aportes mensais e juros compostos.
 
-    Parâmetros:
-    mensal (float): valor investido por mês
-    taxa (float): taxa de juros mensal (ex: 0.01 = 1%)
-    meses (int): quantidade de meses
-    saldo_inicial (float): valor já acumulado anteriormente
+    A cada mês:
+    1. adiciona o aporte
+    2. aplica a taxa de juros
 
-    Retorna:
-    float: valor final acumulado
+    Mantém continuidade com saldo inicial (importante para múltiplas etapas).
     """
     total = saldo_inicial
 

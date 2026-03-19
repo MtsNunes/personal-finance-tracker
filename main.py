@@ -1,32 +1,30 @@
+# main.py
+
 from finance import adicionar_salario, adicionar_gasto, calcular_saldo, calcular_investimento
 import json
 from graficos import grafico_evolucao, grafico_comparacao
 
-# =========================
-# JSON
-# =========================
+
 def salvar_historico(historico):
+    """Salva o histórico de simulações em um arquivo JSON."""
     with open("historico.json", "w") as arquivo:
         json.dump(historico, arquivo, indent=4)
 
+
 def carregar_historico():
+    """Carrega o histórico salvo; retorna lista vazia se não existir."""
     try:
         with open("historico.json", "r") as arquivo:
             return json.load(arquivo)
     except FileNotFoundError:
         return []
 
-# =========================
-# VARIÁVEIS
-# =========================
+
 salario = 0
 gastos = 0
-
 historico = carregar_historico()
 
-# =========================
-# LOOP PRINCIPAL
-# =========================
+
 while True:
     print("\n1 - Adicionar salário")
     print("2 - Adicionar gasto")
@@ -43,9 +41,6 @@ while True:
         print("Entrada inválida")
         continue
 
-    # =========================
-    # SALÁRIO / GASTOS
-    # =========================
     if opcao == 1:
         salario = adicionar_salario()
 
@@ -66,14 +61,11 @@ while True:
         if saldo < 0:
             print("Você está no vermelho!")
 
-    # =========================
-    # NOVA SIMULAÇÃO
-    # =========================
     elif opcao == 5:
+        # Simulação com múltiplas etapas, mantendo continuidade do saldo
         conta = 0
         total_invest = 0
         tempo_total = 0
-
         etapas = []
 
         print("\n--- NOVA SIMULAÇÃO INICIADA ---")
@@ -89,8 +81,6 @@ while True:
                 continue
 
             antes = conta
-
-            # 🔥 AGORA PASSANDO A CONTA (continuidade real)
             conta = calcular_investimento(mensal, taxa, meses, conta)
 
             investido = mensal * meses
@@ -99,7 +89,7 @@ while True:
             total_invest += investido
             tempo_total += meses
 
-            # salva etapa
+            # Cada etapa guarda parâmetros e resultado acumulado
             etapas.append({
                 "mensal": mensal,
                 "meses": meses,
@@ -120,7 +110,6 @@ while True:
             while op not in ['s', 'n']:
                 op = input("Digite apenas s ou n: ").lower()
 
-        # 🔥 salva simulação completa
         historico.append({
             "total_final": conta,
             "total_investido": total_invest,
@@ -131,9 +120,6 @@ while True:
         salvar_historico(historico)
         print("\n✅ Simulação salva com sucesso!\n")
 
-    # =========================
-    # HISTÓRICO
-    # =========================
     elif opcao == 6:
         if not historico:
             print("Nenhuma simulação encontrada.\n")
