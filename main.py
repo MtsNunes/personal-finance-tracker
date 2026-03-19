@@ -1,5 +1,6 @@
 from finance import adicionar_salario, adicionar_gasto, calcular_saldo, calcular_investimento
 import json
+from graficos import grafico_evolucao, grafico_comparacao
 
 # =========================
 # JSON
@@ -33,7 +34,8 @@ while True:
     print("4 - Ver resumo")
     print("5 - Nova simulação de investimento")
     print("6 - Ver histórico de investimentos")
-    print("7 - Sair\n")
+    print("7 - Ver gráficos de uma simulação")
+    print("8 - Sair\n")
 
     try:
         opcao = int(input("Escolha: "))
@@ -153,6 +155,32 @@ while True:
                     print(f"Total após etapa: {etapa['total_apos_etapa']:.2f}")
 
     elif opcao == 7:
+        if not historico:
+            print("Nenhuma simulação encontrada.\n")
+        else:
+            for i, sim in enumerate(historico):
+                print(f"{i+1} - Simulação {i+1}")
+
+            try:
+                escolha = int(input("Escolha a simulação: ")) - 1
+                simulacao = historico[escolha]
+            except:
+                print("Escolha inválida")
+                continue
+
+            print("\n1 - Evolução do investimento")
+            print("2 - Comparação investido vs final")
+
+            tipo = int(input("Escolha o gráfico: "))
+
+            if tipo == 1:
+                grafico_evolucao(simulacao)
+            elif tipo == 2:
+                grafico_comparacao(simulacao)
+            else:
+                print("Opção inválida")
+
+    elif opcao == 8:
         print("Saindo...")
         break
 
